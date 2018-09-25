@@ -15,11 +15,23 @@
 	$UConsultar="";
 	$Notificaciones="";
 	$Reportes="";
+
+	$query=mysqli_query($con, "select Usuario,Correo,Clave,Nombre,Apellido,Genero,Direccion,Telefono,Imagen,Tipo from Usuarios
+inner join Roles on Usuarios.Rol =Roles.Numero WHERE Usuario = '" . $_SESSION['Usuario']."' ;");
+	$rw_user=mysqli_fetch_array($query);
+if ($rw_user['Genero']=="Masculino") {
+	$Mas ="checked";
+}elseif ($rw_user['Genero']=="Femenino") {
+	$Fen ="checked";
+}
+
+
 ?>
 <!doctype html>
 <html lang="es">
 <head>
-	<?php include("head.php");?>
+	<?php include("head.php"); include("modal/cambiar_password.php");	?>
+
 </head>
 <body>
 	<div id="wrapper">
@@ -33,13 +45,9 @@
 				<div class="section-heading">
 					<h1 class="page-title">Perfil Del Usuario</h1>
 				</div>
-				<ul class="nav nav-tabs" role="tablist">
-					<li class="active"><a href="#myprofile" role="tab" data-toggle="tab">Mi Perfil</a></li>
-					<li><a href="#account" role="tab" data-toggle="tab">Cuenta</a></li>
-					<!--<li><a href="#billings" role="tab" data-toggle="tab">Billings &amp; Plans</a></li>
-					<li><a href="#preferences" role="tab" data-toggle="tab">Preferences</a></li>-->
-				</ul>
-				<form>
+				
+			
+				<form id="editar_usuario" name="editar_usuario" method="post">
 					<div class="tab-content content-profile">
 						<!-- MY PROFILE -->
 						<div class="tab-pane fade in active" id="myprofile">
@@ -47,7 +55,7 @@
 								<h2 class="profile-heading">Foto De Perfil</h2>
 								<div class="media">
 									<div class="media-left">
-										<img src="assets/img/user.png" class="user-photo media-object" alt="User">
+										<img src="img/<?php echo $rw_user['Imagen']; ?>" class="user-photo media-object" alt="User">
 									</div>
 									<div class="media-body">
 										<p>Subir Foto.
@@ -58,119 +66,63 @@
 								</div>
 							</div>
 							<div class="profile-section">
-								<h2 class="profile-heading">Informacion Basica</h2>
+								
 								<div class="clearfix">
-									<!-- LEFT SECTION -->
 									<div class="left">
+										<h2 class="profile-heading">Informacion Basica</h2>
 										<div class="form-group">
 											<label>Nombres</label>
-											<input type="text" class="form-control">
-										</div>
-										<div class="form-group">
+											<input type="text" id="Nombre"  Name="Nombre"class="form-control" value="<?php echo $rw_user['Nombre']; ?>">
+										<br>
 											<label>Apellidos</label>
-											<input type="text" class="form-control">
+											<input type="text"id="Apellido"Name="Apellido"  class="form-control" value="<?php echo $rw_user['Apellido']; ?>">
+										<br>
+											<label>Direccion</label>
+											<input type="text" Name="Direccion" class="form-control" value="<?php echo $rw_user['Direccion']; ?>">
+										<br>
+											<label>Telefono</label>
+											<input type="text" Name="Telefono" class="form-control" value="<?php echo $rw_user['Telefono']; ?>">
 										</div>
 										<div class="form-group">
 											<label>Genero</label>
 											<div>
 												<label class="fancy-radio">
-													<input name="gender2" value="male" type="radio" checked>
-													<span><i></i>Masculino</span>
+													<input name="Genero" value="Masculino" type="radio" <?php echo @$Mas; ?>  >
+													<span><i></i>Masculino</span> 
 												</label>
 												<label class="fancy-radio">
-													<input name="gender2" value="female" type="radio">
+													<input name="Genero" value="Femenino" type="radio" <?php echo @$Fen; ?> >
 													<span><i></i>Femenino</span>
 												</label>
 											</div>
 										</div>
-										<div class="form-group">
-											<label>fecha de Nacimiento</label>
-											<div class="input-group date" data-date-autoclose="true" data-provide="datepicker">
-												<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-												<input type="text" class="form-control">
-											</div>
-										</div>
 									</div>
 									<!-- END LEFT SECTION -->
 									<!-- RIGHT SECTION -->
 									<div class="right">
-										<div class="form-group">
-											<label>Direccion</label>
-											<input type="text" class="form-control">
-										</div>
-										<div class="form-group">
-											<label>Telefono</label>
-											<input type="text" class="form-control">
-										</div>
-										<div class="form-group">
-											<label>Ciudad</label>
-											<input type="text" class="form-control">
-										</div>
-										
-										<div class="form-group">
-											<label>Pais</label>
-											<select class="form-control">
-												<option value="">-- Seleccione su Pais --</option>
-												<option value="CO">Colombia</option>
-												
-											</select>
-										</div>
-									</div>
-									<!-- END RIGHT SECTION -->
-								</div>
-								<p class="margin-top-30">
-									<button type="button" class="btn btn-primary">Guardar</button> &nbsp;&nbsp;
-									<button type="button" class="btn btn-default">Cancelar</button>
-								</p>
-							</div>
-						</div>
-						<!-- END MY PROFILE -->
-						<!-- ACCOUNT -->
-						<div class="tab-pane fade" id="account">
-							<div class="profile-section">
-								<div class="clearfix">
-									<!-- LEFT SECTION -->
-									<div class="left">
 										<h2 class="profile-heading">Cuenta</h2>
 										<div class="form-group">
 											<label>Nombre de Usuario</label>
-											<input type="text" class="form-control" value="Administrador" disabled>
-										</div>
-										<div class="form-group">
+											<input type="text" class="form-control" name="Usuario" readonly value="<?php echo $rw_user['Usuario']; ?>">
+										<br>
 											<label>Correo</label>
-											<input type="email" class="form-control" value="juandavid.andrade1997@gmail.com">
-										</div>
-										<div class="form-group">
+											<input type="email" Name="Correo" class="form-control" value="<?php echo $rw_user['Correo']; ?>">
+										<br>
 											<label>Rol</label>
-											<input type="text" class="form-control" value="Administrador" disabled>
+											<input type="text" Name="Rol" class="form-control" value="<?php echo $rw_user['Tipo']; ?>" readonly >
 										</div>
-									</div>
-									<!-- END LEFT SECTION -->
-									<!-- RIGHT SECTION -->
-									<div class="right">
-										<h2 class="profile-heading">Cambiar Contraseña</h2>
-										<div class="form-group">
-											<label>Contraseña Actual</label>
-											<input type="password" class="form-control">
-										</div>
-										<div class="form-group">
-											<label>Nueva Contraseña</label>
-											<input type="password" class="form-control">
-										</div>
-										<div class="form-group">
-											<label>Confirme Contraseña</label>
-											<input type="password" class="form-control">
-										</div>
-									</div>
-									<!-- END RIGHT SECTION -->
+										<button type="button"  class="btn btn-primary"  onclick="get_user_id('<?php echo $rw_user['Usuario'];?>');" data-toggle="modal" data-target="#myModal3">Cambiar Contraseña</button>
+									</div>	
+									<!-- END RIGHT SECTION  onclick="get_user_id('<?php echo $rw_user['Usuario'];?>');" data-toggle="modal" data-target="#myModal3" -->
 								</div>
+								<div id="resultados_ajax2"></div>
 								<p class="margin-top-30">
-									<button type="button" class="btn btn-primary">Guardar</button> &nbsp;&nbsp;
-									<button class="btn btn-default">Cancelar</button>
+									<button type="submit" class="btn btn-primary">Guardar</button> &nbsp;&nbsp;
+									<button type="button" class="btn btn-default">Cancelar</button>
 								</p>
+								
 							</div>
 						</div>
-						
 					</div>
 				</form>
 			</div>
@@ -205,6 +157,44 @@
 			$(this).parent().find('.plan-title').append('<span><i class="fa fa-check-circle"></i></span>');
 		});
 	});
+	$( "#editar_usuario" ).submit(function( event ) {
+  $('#actualizar_datos2').attr("disabled", true);
+
+ var parametros = $(this).serialize();
+	 $.ajax({
+			type: "POST",
+			url: "ajax/editar_usuario.php",
+			data: parametros,
+			 beforeSend: function(objeto){
+				$("#resultados_ajax2").html("Mensaje: Cargando...");
+			  },
+			success: function(datos){
+			$("#resultados_ajax2").html(datos);
+			$('#actualizar_datos2').attr("disabled", false);
+			load(1);
+		  }
+	});
+  event.preventDefault();
+})
+	$( "#editar_password" ).submit(function( event ) {
+  $('#actualizar_datos3').attr("disabled", true);
+  
+ var parametros = $(this).serialize();
+	 $.ajax({
+			type: "POST",
+			url: "ajax/editar_password.php",
+			data: parametros,
+			 beforeSend: function(objeto){
+				$("#resultados_ajax3").html("Mensaje: Cargando...");
+			  },
+			success: function(datos){
+			$("#resultados_ajax3").html(datos);
+			$('#actualizar_datos3').attr("disabled", false);
+			load(1);
+		  }
+	});
+  event.preventDefault();
+})
 	</script>
 </body>
 

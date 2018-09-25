@@ -19,9 +19,8 @@
 			})
 		}
 
-	function Seleccionar(Nit,Nombre,Telefono,Correo)
-		{
-			document.getElementById('Nit_cliente').value = Nit ;
+	function Seleccionar(Nit,Nombre,Telefono,Correo){
+		document.getElementById('Nit_cliente').value = Nit ;
 			document.getElementById('Nombre_cliente').value = Nombre ;
 document.getElementById('Telefono_cliente').value = Telefono ;
 document.getElementById('Correo_cliente').value = Correo ;			

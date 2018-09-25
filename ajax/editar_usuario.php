@@ -7,50 +7,45 @@ if (version_compare(PHP_VERSION, '5.3.7', '<')) {
     // if you are using PHP 5.3 or PHP 5.4 you have to include the password_api_compatibility_library.php
     // (this library adds the PHP 5.5 password hashing functions to older versions of PHP)
     require_once("../libraries/password_compatibility_library.php");
-}		
-		if (empty($_POST['firstname2'])){
-			$errors[] = "Nombres vacíos";
-		} elseif (empty($_POST['lastname2'])){
-			$errors[] = "Apellidos vacíos";
-		}  elseif (empty($_POST['user_name2'])) {
-            $errors[] = "Nombre de usuario vacío";
-        }  elseif (strlen($_POST['user_name2']) > 64 || strlen($_POST['user_name2']) < 2) {
-            $errors[] = "Nombre de usuario no puede ser inferior a 2 o más de 64 caracteres";
-        } elseif (!preg_match('/^[a-z\d]{2,64}$/i', $_POST['user_name2'])) {
-            $errors[] = "Nombre de usuario no encaja en el esquema de nombre: Sólo aZ y los números están permitidos , de 2 a 64 caracteres";
-        } elseif (empty($_POST['user_email2'])) {
-            $errors[] = "El correo electrónico no puede estar vacío";
-        } elseif (strlen($_POST['user_email2']) > 64) {
-            $errors[] = "El correo electrónico no puede ser superior a 64 caracteres";
-        } elseif (!filter_var($_POST['user_email2'], FILTER_VALIDATE_EMAIL)) {
+}		if (empty($_POST['Usuario'])){
+			$errors[] = "Usuariovacío";
+		} elseif (empty($_POST['Nombre'])){
+			$errors[] = "Nombre vacío";
+		} elseif (empty($_POST['Apellido'])){
+			$errors[] = "Apellidos vacío";
+		}  elseif (empty($_POST['Direccion'])) {
+            $errors[] = "Direccion vacía";
+        } elseif (empty($_POST['Telefono'])) {
+            $errors[] = "Telefono vacío";
+        } elseif (!filter_var($_POST['Correo'], FILTER_VALIDATE_EMAIL)) {
             $errors[] = "Su dirección de correo electrónico no está en un formato de correo electrónico válida";
-        } elseif (
-			!empty($_POST['user_name2'])
-			&& !empty($_POST['firstname2'])
-			&& !empty($_POST['lastname2'])
-            && strlen($_POST['user_name2']) <= 64
-            && strlen($_POST['user_name2']) >= 2
-            && preg_match('/^[a-z\d]{2,64}$/i', $_POST['user_name2'])
-            && !empty($_POST['user_email2'])
-            && strlen($_POST['user_email2']) <= 64
-            && filter_var($_POST['user_email2'], FILTER_VALIDATE_EMAIL)
+        }  elseif (
+			!empty($_POST['Usuario'])
+			&& !empty($_POST['Nombre'])
+			&& !empty($_POST['Apellido'])
+            && !empty($_POST['Direccion'])
+			&& !empty($_POST['Telefono'])
+			&& !empty($_POST['Genero'])
+            && filter_var($_POST['Correo'], FILTER_VALIDATE_EMAIL)
           )
          {
             require_once ("../config/db.php");//Contiene las variables de configuracion para conectar a la base de datos
 			require_once ("../config/conexion.php");//Contiene funcion que conecta a la base de datos
 			
 				// escaping, additionally removing everything that could be (html/javascript-) code
-                $firstname = mysqli_real_escape_string($con,(strip_tags($_POST["firstname2"],ENT_QUOTES)));
-				$lastname = mysqli_real_escape_string($con,(strip_tags($_POST["lastname2"],ENT_QUOTES)));
-				$user_name = mysqli_real_escape_string($con,(strip_tags($_POST["user_name2"],ENT_QUOTES)));
-                $user_email = mysqli_real_escape_string($con,(strip_tags($_POST["user_email2"],ENT_QUOTES)));
-				
-				$user_id=intval($_POST['mod_id']);
+                $Usuario = mysqli_real_escape_string($con,(strip_tags($_POST["Usuario"],ENT_QUOTES)));
+				$Nombre = mysqli_real_escape_string($con,(strip_tags($_POST["Nombre"],ENT_QUOTES)));
+				$Apellido = mysqli_real_escape_string($con,(strip_tags($_POST["Apellido"],ENT_QUOTES)));
+                $Direccion = mysqli_real_escape_string($con,(strip_tags($_POST["Direccion"],ENT_QUOTES)));
+				$Telefono = mysqli_real_escape_string($con,(strip_tags($_POST["Telefono"],ENT_QUOTES)));
+				$Genero = mysqli_real_escape_string($con,(strip_tags($_POST["Genero"],ENT_QUOTES)));
+				$Correo = mysqli_real_escape_string($con,(strip_tags($_POST["Correo"],ENT_QUOTES)));
+
 					
                
 					// write new user's data into database
-                    $sql = "UPDATE users SET firstname='".$firstname."', lastname='".$lastname."', user_name='".$user_name."', user_email='".$user_email."'
-                            WHERE user_id='".$user_id."';";
+                    $sql =  "UPDATE Usuarios SET Nombre='".$Nombre."', Apellido='".$Apellido."', Direccion='".$Direccion."', Telefono='".$Telefono."', Genero='".$Genero."', Correo='".$Correo."'
+                            WHERE Usuario='".$Usuario."';";
                     $query_update = mysqli_query($con,$sql);
 
                     // if user has been added successfully

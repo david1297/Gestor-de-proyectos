@@ -23,7 +23,7 @@ if (version_compare(PHP_VERSION, '5.3.7', '<')) {
             require_once ("../config/db.php");//Contiene las variables de configuracion para conectar a la base de datos
 			require_once ("../config/conexion.php");//Contiene funcion que conecta a la base de datos
 			
-				$user_id=intval($_POST['user_id_mod']);
+				$user_id=$_POST['user_id_mod'];
 				$user_password = $_POST['user_password_new3'];
 				
                 // crypt the user's password with PHP 5.5's password_hash() function, results in a 60 character
@@ -31,9 +31,9 @@ if (version_compare(PHP_VERSION, '5.3.7', '<')) {
                 // PHP 5.3/5.4, by the password hashing compatibility library
 				$user_password_hash = password_hash($user_password, PASSWORD_DEFAULT);
 					
-               
+      
 					// write new user's data into database
-                    $sql = "UPDATE users SET user_password_hash='".$user_password_hash."' WHERE user_id='".$user_id."'";
+                    $sql = "UPDATE Usuarios SET Clave='".$user_password_hash."' WHERE Usuario='".$user_id."';";
                     $query = mysqli_query($con,$sql);
 
                     // if user has been added successfully

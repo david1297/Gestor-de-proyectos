@@ -27,16 +27,17 @@ class Login
             }
             if (!$this->db_connection->connect_errno) {
                 $user_name = $this->db_connection->real_escape_string($_POST['user_name']);
-                $sql = "SELECT user_id, user_name, user_email, user_password_hash
-                        FROM users
-                        WHERE user_name = '" . $user_name . "' OR user_email = '" . $user_name . "';";
+                $sql = "select Usuario,Correo,Clave,Nombre,Rol,Imagen from Usuarios
+                        WHERE Usuario = '" . $user_name . "' OR Correo = '" . $user_name . "';";
                 $result_of_login_check = $this->db_connection->query($sql);
                 if ($result_of_login_check->num_rows == 1) {
                     $result_row = $result_of_login_check->fetch_object();
-                    if (password_verify($_POST['user_password'], $result_row->user_password_hash)) {
-                        $_SESSION['user_id'] = $result_row->user_id;
-						$_SESSION['user_name'] = $result_row->user_name;
-                        $_SESSION['user_email'] = $result_row->user_email;
+                    if (password_verify($_POST['user_password'], $result_row->Clave)) {
+                        $_SESSION['Usuario'] = $result_row->Usuario;
+						$_SESSION['Correo'] = $result_row->Correo;
+                        $_SESSION['Nombre'] = $result_row->Nombre;
+                        $_SESSION['Rol'] = $result_row->Rol;
+                        $_SESSION['Imagen']= $result_row->Imagen;
                         $_SESSION['user_login_status'] = 1;
 
                     } else {
