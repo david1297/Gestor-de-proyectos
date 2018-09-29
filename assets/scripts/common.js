@@ -13,8 +13,8 @@ $(document).ready(function() {
 
 	// toggle fullwidth layout
 	$('.btn-toggle-fullwidth').on('click', function() {
-		if(!$('body').hasClass('layout-fullwidth')) {
-			$('body').addClass('layout-fullwidth');
+		if(!$('#Menus').hasClass('layout-fullwidth')) {
+			$('#Menus').addClass('layout-fullwidth');
 			$(this).find(".fa").toggleClass('fa-angle-left fa-angle-right');
 
 			$(this).animate({
@@ -22,7 +22,7 @@ $(document).ready(function() {
 			}, 800);
 
 		} else {
-			$('body').removeClass('layout-fullwidth');
+			$('#Menus').removeClass('layout-fullwidth');
 			$(this).find(".fa").toggleClass('fa-angle-left fa-angle-right');
 
 			$(this).animate({
