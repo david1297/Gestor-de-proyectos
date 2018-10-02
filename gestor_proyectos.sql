@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 24-09-2018 a las 21:29:17
+-- Tiempo de generación: 03-10-2018 a las 00:25:32
 -- Versión del servidor: 10.1.34-MariaDB
 -- Versión de PHP: 7.2.8
 
@@ -21,6 +21,45 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `gestor_proyectos`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `avancede`
+--
+
+CREATE TABLE `avancede` (
+  `Numero` int(11) DEFAULT NULL,
+  `Producto` varchar(80) DEFAULT NULL,
+  `Cantidad` float DEFAULT NULL,
+  `ValorUnitario` float DEFAULT NULL,
+  `ValorIva` float DEFAULT NULL,
+  `PorcentajeIva` float DEFAULT NULL,
+  `ValorTotal` float DEFAULT NULL,
+  `Descripcion` varchar(1024) DEFAULT NULL,
+  `Costo` float DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `avanceen`
+--
+
+CREATE TABLE `avanceen` (
+  `Numero` int(11) NOT NULL,
+  `Proyecto` int(11) DEFAULT NULL,
+  `FechaDeRealizacion` date DEFAULT NULL,
+  `Subtotal` float DEFAULT NULL,
+  `Total` float DEFAULT NULL,
+  `Iva` float DEFAULT NULL,
+  `FechaEntrega` date DEFAULT NULL,
+  `Autorizado` tinyint(1) DEFAULT NULL,
+  `Finalizado` tinyint(1) DEFAULT NULL,
+  `Descripcion` varchar(1024) DEFAULT NULL,
+  `Usuario` varchar(80) DEFAULT NULL,
+  `Costo` float DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -57,6 +96,47 @@ CREATE TABLE `productos` (
   `Iva` int(11) DEFAULT NULL,
   `Porc_Iva` float DEFAULT NULL,
   `Tipo` varchar(80) DEFAULT NULL,
+  `Costo` float DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `proyectode`
+--
+
+CREATE TABLE `proyectode` (
+  `Numero` int(11) DEFAULT NULL,
+  `Producto` varchar(80) DEFAULT NULL,
+  `Cantidad` float DEFAULT NULL,
+  `Faltantes` float DEFAULT NULL,
+  `ValorUnitario` float DEFAULT NULL,
+  `ValorIva` float DEFAULT NULL,
+  `PorcentajeIva` float DEFAULT NULL,
+  `ValorTotal` float DEFAULT NULL,
+  `Descripcion` varchar(1024) DEFAULT NULL,
+  `Costo` float DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `proyectoen`
+--
+
+CREATE TABLE `proyectoen` (
+  `Numero` int(11) NOT NULL,
+  `Tercero` varchar(255) DEFAULT NULL,
+  `FechaDeRealizacion` date DEFAULT NULL,
+  `Subtotal` float DEFAULT NULL,
+  `Total` float DEFAULT NULL,
+  `Iva` float DEFAULT NULL,
+  `FechaInicio` date DEFAULT NULL,
+  `FechaFin` date DEFAULT NULL,
+  `Autorizado` tinyint(1) DEFAULT NULL,
+  `Finalizado` tinyint(1) DEFAULT NULL,
+  `Descripcion` varchar(1024) DEFAULT NULL,
+  `Usuario` varchar(80) DEFAULT NULL,
   `Costo` float DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -129,6 +209,21 @@ INSERT INTO `usuarios` (`Usuario`, `Correo`, `Rol`, `Clave`, `Nombre`, `Apellido
 --
 
 --
+-- Indices de la tabla `avancede`
+--
+ALTER TABLE `avancede`
+  ADD KEY `Producto` (`Producto`),
+  ADD KEY `Numero` (`Numero`);
+
+--
+-- Indices de la tabla `avanceen`
+--
+ALTER TABLE `avanceen`
+  ADD PRIMARY KEY (`Numero`),
+  ADD KEY `Usuario` (`Usuario`),
+  ADD KEY `Proyecto` (`Proyecto`);
+
+--
 -- Indices de la tabla `permisos`
 --
 ALTER TABLE `permisos`
@@ -140,6 +235,21 @@ ALTER TABLE `permisos`
 --
 ALTER TABLE `productos`
   ADD PRIMARY KEY (`Codigo`);
+
+--
+-- Indices de la tabla `proyectode`
+--
+ALTER TABLE `proyectode`
+  ADD KEY `Producto` (`Producto`),
+  ADD KEY `Numero` (`Numero`);
+
+--
+-- Indices de la tabla `proyectoen`
+--
+ALTER TABLE `proyectoen`
+  ADD PRIMARY KEY (`Numero`),
+  ADD KEY `Tercero` (`Tercero`),
+  ADD KEY `Usuario` (`Usuario`);
 
 --
 -- Indices de la tabla `roles`
@@ -165,10 +275,38 @@ ALTER TABLE `usuarios`
 --
 
 --
+-- Filtros para la tabla `avancede`
+--
+ALTER TABLE `avancede`
+  ADD CONSTRAINT `avancede_ibfk_1` FOREIGN KEY (`Producto`) REFERENCES `productos` (`Codigo`),
+  ADD CONSTRAINT `avancede_ibfk_2` FOREIGN KEY (`Numero`) REFERENCES `avanceen` (`Numero`);
+
+--
+-- Filtros para la tabla `avanceen`
+--
+ALTER TABLE `avanceen`
+  ADD CONSTRAINT `avanceen_ibfk_1` FOREIGN KEY (`Usuario`) REFERENCES `usuarios` (`Usuario`),
+  ADD CONSTRAINT `avanceen_ibfk_2` FOREIGN KEY (`Proyecto`) REFERENCES `proyectoen` (`Numero`);
+
+--
 -- Filtros para la tabla `permisos`
 --
 ALTER TABLE `permisos`
   ADD CONSTRAINT `permisos_ibfk_1` FOREIGN KEY (`Tipo`) REFERENCES `roles` (`Numero`);
+
+--
+-- Filtros para la tabla `proyectode`
+--
+ALTER TABLE `proyectode`
+  ADD CONSTRAINT `proyectode_ibfk_1` FOREIGN KEY (`Producto`) REFERENCES `productos` (`Codigo`),
+  ADD CONSTRAINT `proyectode_ibfk_2` FOREIGN KEY (`Numero`) REFERENCES `proyectoen` (`Numero`);
+
+--
+-- Filtros para la tabla `proyectoen`
+--
+ALTER TABLE `proyectoen`
+  ADD CONSTRAINT `proyectoen_ibfk_1` FOREIGN KEY (`Tercero`) REFERENCES `terceros` (`Nit`),
+  ADD CONSTRAINT `proyectoen_ibfk_2` FOREIGN KEY (`Usuario`) REFERENCES `usuarios` (`Usuario`);
 
 --
 -- Filtros para la tabla `usuarios`
