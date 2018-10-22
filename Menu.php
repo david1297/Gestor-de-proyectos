@@ -11,7 +11,7 @@
 						<ul class="nav navbar-nav">
 							<li class="dropdown">
 								<a href="#" class="dropdown-toggle icon-menu" data-toggle="dropdown">
-									<i class="lnr lnr-alarm"></i>
+								<i class="far fa-bell"></i>
 									<span class="notification-dot"></span>
 								</a>
 								<ul class="dropdown-menu notifications">
@@ -86,7 +86,7 @@
 							</li>
 							<li class="dropdown">
 								<a href="#" class="dropdown-toggle icon-menu" data-toggle="dropdown">
-									<i class="lnr lnr-cog"></i>
+								<i class="fas fa-user-cog"></i>
 								</a>
 								<ul class="dropdown-menu user-menu menu-icon">
 									<li class="menu-heading">CONFIGURACIONES DE LA CUENTA</li>
@@ -106,31 +106,27 @@
 			</button>
 			<div class="sidebar-scroll">
 				<div class="user-account">
-					<img src="img/<?php echo $_SESSION['Imagen'];?>" width="50%" class="img-responsive img-circle user-photo" alt="User Profile Picture">
+				<!--	<img src="img/<?php echo $_SESSION['Imagen'];?>" width="50%" class="img-responsive img-circle user-photo" alt="User Profile Picture">
 					<div class="dropdown">
 						<a href="#" class="dropdown-toggle user-name">Hola, <strong><?php echo $_SESSION['Nombre'];?></strong></a>
 						
-					</div>
+					</div>-->
 				</div>
 				<nav id="left-sidebar-nav" class="sidebar-nav">
 					<ul id="main-menu" class="metismenu">
-						<li class="<?php echo $Inicio;?>"><a href="index.php"><i class="lnr lnr-home"></i> <span>Inicio</span></a></li>
-						<li class="<?php echo $Proyectos;?>">
-							<a href="#uiElements" class="has-arrow" aria-expanded="false"><i class="lnr lnr-rocket"></i> <span>Proyectos</span></a>
-							<ul aria-expanded="true">
-								<li class="<?php echo $PCrear;?>"><a href="Nuevo-Proyecto.php"><i class="lnr lnr-file-add"></i>Nuevo</a></li>
-								<li class="<?php echo $PConsultar;?>"><a href="Consultar-Proyectos.php"><i class="lnr lnr-magnifier"></i>Consultar</a></li>
-							</ul>
-						</li>
+						<li class="<?php echo $Inicio;?>"><a href="index.php"><i class="fas fa-home"></i> <span>Inicio</span></a></li>
+						<li class="<?php echo $Proyectos;?>"><a href="Consultar-Proyectos.php"><i class="fas fa-rocket"></i><span>Proyectos</span></a></li>
+						<li class="<?php echo $Garantias;?>"><a href="#"><i class="fas fa-wrench"></i> <span>Garantias</span></a></li>
+						<li class="<?php echo $Ajustes;?>"><a href="#"><i class="fas fa-exchange-alt"></i>  <span>Ajustes</span></a></li>
 						<li class="<?php echo $Usuarios;?>">
-							<a href="#subPages" class="has-arrow" aria-expanded="false"><i class="lnr lnr-users"></i> <span>Usuarios</span></a>
+							<a href="#subPages" class="has-arrow" aria-expanded="false"><i class="fas fa-users"></i> <span>Usuarios</span></a>
 							<ul aria-expanded="true">
-								<li class="<?php echo $UCrear;?>"><a href="#"><i class="lnr lnr-file-add"></i>Crear</a></li>
-								<li class="<?php echo $UConsultar;?>"><a href="#"><i class="lnr lnr-magnifier"></i>Consltar</a></li>
+								<li class="<?php echo $UCrear;?>"><a href="#"><i class="fas fa-file-alt"></i>Crear</a></li>
+								<li class="<?php echo $UConsultar;?>"><a href="#"><i class="fas fa-search"></i>Consltar</a></li>
 							</ul>
 						</li>
-						<li class="<?php echo $Notificaciones;?>"><a href="#"><i class="lnr lnr-alarm"></i> <span>Notificaciones</span> <span class="badge bg-danger">15</span></a></li>
-						<li class="<?php echo $Reportes;?>"><a href="#"><i class="lnr lnr-book"></i> <span>Reportes</span></a></li>
+						<li class="<?php echo $Notificaciones;?>"><a href="#"><i class="fas fa-bell"></i> <span>Notificaciones</span> <span class="badge bg-danger">15</span></a></li>
+						<li class="<?php echo $Reportes;?>"><a href="#"><i class="fas fa-book"></i> <span>Reportes</span></a></li>
 					</ul>
 				</nav>
 				

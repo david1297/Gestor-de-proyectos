@@ -133,6 +133,68 @@ FOREIGN KEY (Numero) references AvanceEn(Numero)
 );
 drop table AvanceDe;
 
+CREATE TABLE GarantiaEn(
+Numero int primary key,
+Proyecto int,
+FechaDeRealizacion date,
+Subtotal Float,
+Total Float,
+Iva Float,
+FechaEntrega date,
+Autorizado boolean,
+Descripcion varchar(1024),
+Usuario varchar(80),
+Costo float,
+FOREIGN KEY (Usuario) references Usuarios(Usuario),
+FOREIGN KEY (Proyecto) references ProyectoEn(Numero)
+);
+
+CREATE TABLE GarantiaDe(
+Numero int,
+Producto Varchar(80),
+Cantidad float,
+ValorUnitario float,
+ValorIva float,
+PorcentajeIva float,
+ValorTotal float,
+Descripcion varchar(1024),
+Costo float,
+FOREIGN KEY (Producto) references Productos(Codigo),
+FOREIGN KEY (Numero) references GarantiaEn(Numero)
+);
+
+CREATE TABLE ajusteEn(
+Numero int primary key,
+Proyecto int,
+FechaDeRealizacion date,
+Subtotal Float,
+Total Float,
+Iva Float,
+FechaEntrega date,
+Autorizado boolean,
+Descripcion varchar(1024),
+Usuario varchar(80),
+Costo float,
+FOREIGN KEY (Usuario) references Usuarios(Usuario),
+FOREIGN KEY (Proyecto) references ProyectoEn(Numero)
+);
+
+CREATE TABLE ajusteDe(
+Numero int,
+Producto Varchar(80),
+Cantidad float,
+ValorUnitario float,
+ValorIva float,
+PorcentajeIva float,
+ValorTotal float,
+Descripcion varchar(1024),
+Costo float,
+FOREIGN KEY (Producto) references Productos(Codigo),
+FOREIGN KEY (Numero) references ajusteEn(Numero)
+);
+
+
+
 
 
 

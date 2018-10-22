@@ -22,6 +22,7 @@
 	<?php include("head.php");?>
 </head>
 <body>
+<div id="Menus">
 	<div id="wrapper">
 		<?php
 			include("Menu.php");
@@ -59,6 +60,7 @@
 					<p class="copyright">&copy; Copyright <a href="https://www.tupro.com.co/" target="_blank">TuPro Creativo. </a>Todos los derechos reservados</p>
 				</footer>
 		</div>
+	</div>
 	</div>
 	<script src="assets/vendor/jquery/jquery.min.js"></script>
 	<script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>

@@ -8,13 +8,13 @@
 	require_once ("config/conexion.php");
 	$Inicio="active";
 	$Proyectos="";
-	$PCrear="";
-	$PConsultar="";
 	$Usuarios="";
 	$UCrear="";
 	$UConsultar="";
 	$Notificaciones="";
 	$Reportes="";
+	$Garantias="";
+	$Ajustes="";
 ?>
 <!doctype html>
 <html lang="es">
