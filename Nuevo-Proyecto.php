@@ -8,8 +8,6 @@
 	require_once ("config/conexion.php");
 	$Inicio="";
 	$Proyectos="active";
-	$PCrear="active";
-	$PConsultar="";
 	$Usuarios="";
 	$UCrear="";
 	$UConsultar="";
@@ -63,24 +61,9 @@
 								</div>
 								<div class="row">
 									<div class="col-md-4">
-										<label for="empresa" class="control-label">Vendedor</label>
-										<select class="form-control" id="id_vendedor">
-											<?php
-												$sql_vendedor=mysqli_query($con,"select * from users order by lastname");
-												while ($rw=mysqli_fetch_array($sql_vendedor)){
-													$id_vendedor=$rw["user_id"];
-													$nombre_vendedor=$rw["firstname"]." ".$rw["lastname"];
-													if ($id_vendedor==$_SESSION['user_id']){
-														$selected="selected";
-													} else {
-														$selected="";
-													}
-													?>
-													<option value="<?php echo $id_vendedor?>" <?php echo $selected;?>><?php echo $nombre_vendedor?></option>
-													<?php
-												}
-											?>
-										</select>
+										<label for="empresa" class="control-label">Usuario</label>
+											<input type="text" class="form-control" id="Correo_cliente" placeholder="Email" value="<?php echo $_SESSION['Usuario'];?>" readonly>
+										
 									</div>	
 									<div class="col-md-4">
 										<label for="tel2" class="control-label">Fecha</label>

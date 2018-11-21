@@ -84,22 +84,21 @@
 						$telefono_cliente=$row['Telefono'];
 						$email_cliente=$row['Correo'];
 						$Usuario=$row['Usuario'];
-						$estado_factura=$row['estado_factura'];
-						if ($estado_factura==1){$text_estado="Pagada";$label_class='label-success';}
+						$Estado=$row['Finalizado'];
+						if ($Estado==1){$text_estado="Finalizado";$label_class='label-success';}
 						else{$text_estado="Pendiente";$label_class='label-warning';}
-						$total_venta=$row['total_venta'];
+						$total=$row['Total'];
 					?>
 					<tr>
 						<td><?php echo $N_Proyecto; ?></td>
 						<td><?php echo $fecha; ?></td>
-						<td><a href="#" data-toggle="tooltip" data-placement="top" title="<i class='glyphicon glyphicon-phone'></i> <?php echo $telefono_cliente;?><br><i class='glyphicon glyphicon-envelope'></i>  <?php echo $email_cliente;?>" ><?php echo $nombre_cliente;?></a></td>
+						<td><a href="#" data-toggle="tooltip" data-placement="top" title="<i class='glyphicon glyphicon-phone'></i>&nbsp; <?php echo $telefono_cliente;?><br><i class='glyphicon glyphicon-envelope'></i>   <?php echo $email_cliente;?>" ><?php echo $nombre_cliente;?></a></td>
 						<td><?php echo $Usuario; ?></td>
 						<td><span class="label <?php echo $label_class;?>"><?php echo $text_estado; ?></span></td>
-						<td class='text-right'><?php echo number_format ($total_venta,2); ?></td>					
+						<td class='text-right'><?php echo number_format ($total,2); ?></td>					
 					<td class="text-right">
-						<a href="editar_factura.php?id_factura=<?php echo $id_factura;?>" class='btn btn-default' title='Editar factura' ><i class="glyphicon glyphicon-edit"></i></a> 
+						<a href="editar_Proyectos.php?N_Proyecto=<?php echo $N_Proyecto;?>" class='btn btn-default' title='Editar factura' ><i class="glyphicon glyphicon-edit"></i></a> 
 						<a href="#" class='btn btn-default' title='Descargar factura' onclick="imprimir_factura('<?php echo $id_factura;?>');"><i class="glyphicon glyphicon-download"></i></a> 
-						<a href="#" class='btn btn-default' title='Borrar factura' onclick="eliminar('<?php echo $numero_factura; ?>')"><i class="glyphicon glyphicon-trash"></i> </a>
 					</td>
 						
 					</tr>

@@ -5,8 +5,8 @@
 	$action = (isset($_REQUEST['action'])&& $_REQUEST['action'] !=NULL)?$_REQUEST['action']:'';
 	if($action == 'ajax'){
          $Busc_Cliente = mysqli_real_escape_string($con,(strip_tags($_REQUEST['Busc_Cliente'], ENT_QUOTES)));
-		 $aColumns = array('id_cliente', 'nombre_cliente');
-		 $sTable = "clientes";
+		 $aColumns = array('Nit', 'Nombre');
+		 $sTable = "Terceros";
 		 $sWhere = "";
 		if ( $_GET['Busc_Cliente'] != "" )
 		{
@@ -47,19 +47,19 @@
 				</tr>
 				<?php
 				while ($row=mysqli_fetch_array($query)){
-					$id_cliente=$row['id_cliente'];
-					$nombre_cliente=$row['nombre_cliente'];
-					$telefono_cliente=$row['telefono_cliente'];
-					$email_cliente=$row["email_cliente"];
+					$Nit=$row['Nit'];
+					$Nombre=$row['Nombre'];
+					$Telefono=$row['Telefono'];
+					$Correo=$row["Correo"];
 					?>
 					<tr>
-						<td><?php echo $id_cliente; ?></td>
-						<td><?php echo $nombre_cliente; ?></td>
-						<td><?php echo $telefono_cliente; ?></td>
-						<td><?php echo $email_cliente; ?></td>
+						<td><?php echo $Nit; ?></td>
+						<td><?php echo $Nombre; ?></td>
+						<td><?php echo $Telefono; ?></td>
+						<td><?php echo $Correo; ?></td>
 						
 						
-						<td class='text-center'><a class='btn btn-success'href="#" data-dismiss="modal" onclick="Seleccionar('<?php echo $id_cliente ?>','<?php echo $nombre_cliente ?>','<?php echo $telefono_cliente ?>','<?php echo $email_cliente ?>')"><i class="glyphicon glyphicon-ok"></i></a></td>
+						<td class='text-center'><a class='btn btn-success'href="#" data-dismiss="modal" onclick="Seleccionar('<?php echo $Nit ?>','<?php echo $Nombre ?>','<?php echo $Telefono ?>','<?php echo $Correo ?>')"><i class="glyphicon glyphicon-ok"></i></a></td>
 					</tr>
 					<?php
 				}
