@@ -19,11 +19,11 @@
 	require_once ("config/db.php");//Contiene las variables de configuracion para conectar a la base de datos
 	require_once ("config/conexion.php");//Contiene funcion que conecta a la base de datos
 	
-	if (isset($_GET['id_factura']))
+	if (isset($_GET['N_Proyecto']))
 	{
-		$id_factura=intval($_GET['id_factura']);
+		$N_Proyecto=intval($_GET['N_Proyecto']);
 		$campos="clientes.id_cliente, clientes.nombre_cliente, clientes.telefono_cliente, clientes.email_cliente, facturas.id_vendedor, facturas.fecha_factura, facturas.condiciones, facturas.estado_factura, facturas.numero_factura";
-		$sql_factura=mysqli_query($con,"select $campos from facturas, clientes where facturas.id_cliente=clientes.id_cliente and id_factura='".$id_factura."'");
+		$sql_factura=mysqli_query($con,"select $campos from facturas, clientes where facturas.id_cliente=clientes.id_cliente and id_factura='".$N_Proyecto."'");
 		$count=mysqli_num_rows($sql_factura);
 		if ($count==1)
 		{
@@ -42,13 +42,13 @@
 		}	
 		else
 		{
-			header("location: facturas.php");
+			//header("location: facturas.php");
 			exit;	
 		}
 	} 
 	else 
 	{
-		header("location: facturas.php");
+		//header("location: facturas.php");
 		exit;
 	}
 ?>

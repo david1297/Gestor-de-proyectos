@@ -13,6 +13,38 @@
 	$UConsultar="";
 	$Notificaciones="";
 	$Reportes="";
+/*	if (isset($_GET['N_Proyecto']))
+	{
+		$N_Proyecto=intval($_GET['N_Proyecto']);
+		$campos="proyectoen.Numero,proyectoen.Tercero,proyectoen.FechaDeRealizacion,proyectoen.Subtotal,proyectoen.Total,proyectoen.Iva,proyectoen.FechaInicio,proyectoen.FechaFin,proyectoen.Autorizado,proyectoen.Descripcion,proyectoen.Usuario,proyectoen.Costo";
+		$sql_factura=mysqli_query($con,"select $campos from proyectoen, clientes where facturas.id_cliente=clientes.id_cliente and id_factura='".$N_Proyecto."'");
+		$count=mysqli_num_rows($sql_factura);
+		if ($count==1)
+		{
+				$rw_factura=mysqli_fetch_array($sql_factura);
+				$id_cliente=$rw_factura['id_cliente'];
+				$nombre_cliente=$rw_factura['nombre_cliente'];
+				$telefono_cliente=$rw_factura['telefono_cliente'];
+				$email_cliente=$rw_factura['email_cliente'];
+				$id_vendedor_db=$rw_factura['id_vendedor'];
+				$fecha_factura=date("d/m/Y", strtotime($rw_factura['fecha_factura']));
+				$condiciones=$rw_factura['condiciones'];
+				$estado_factura=$rw_factura['estado_factura'];
+				$numero_factura=$rw_factura['numero_factura'];
+				$_SESSION['id_factura']=$id_factura;
+				$_SESSION['numero_factura']=$numero_factura;
+		}	
+		else
+		{
+			//header("location: facturas.php");
+			//exit;	
+		}
+	} 
+	else 
+	{
+		//header("location: facturas.php");
+		//exit;
+	}*/
 ?>
 <!doctype html>
 <html lang="es">
@@ -28,7 +60,13 @@
 			<div class="container-fluid">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<h4>Nuevo Proyecto</h4>
+					<?php
+						if (isset($_GET['N_Proyecto'])){
+							echo '	<h4>Editar Proyecto</h4>';
+						}else{
+							echo '<h4>Nuevo Proyecto</h4>';
+						}
+					?>	
 					</div>
 					<div class="panel-body">
 					<?php 

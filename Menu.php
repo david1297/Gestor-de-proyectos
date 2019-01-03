@@ -114,19 +114,17 @@
 				</div>
 				<nav id="left-sidebar-nav" class="sidebar-nav">
 					<ul id="main-menu" class="metismenu">
+					<!--<i class="fas fa-cogs"></i> <i class="fas fa-dolly"></i> -->
 						<li class="<?php echo $Inicio;?>"><a href="index.php"><i class="fas fa-home"></i> <span>Inicio</span></a></li>
+						<li class="<?php echo $Administracion;?>"><a href="Administracion.php"><i class="fab fa-jedi-order"></i> <span>Administracion</span></a></li>
+						<li class="<?php echo $Clientes;?>"><a href="Consultar-Clientes.php"><i class="fas fa-user-tie"></i><span>Clientes</span></a></li>
+						<li class="<?php echo $Productos;?>"><a href="Consultar-Productos.php"><i class="fas fa-parachute-box"></i><span>Productos</span></a></li>
 						<li class="<?php echo $Proyectos;?>"><a href="Consultar-Proyectos.php"><i class="fas fa-rocket"></i><span>Proyectos</span></a></li>
-						<li class="<?php echo $Garantias;?>"><a href="#"><i class="fas fa-wrench"></i> <span>Garantias</span></a></li>
-						<li class="<?php echo $Ajustes;?>"><a href="#"><i class="fas fa-exchange-alt"></i>  <span>Ajustes</span></a></li>
-						<li class="<?php echo $Usuarios;?>">
-							<a href="#subPages" class="has-arrow" aria-expanded="false"><i class="fas fa-users"></i> <span>Usuarios</span></a>
-							<ul aria-expanded="true">
-								<li class="<?php echo $UCrear;?>"><a href="#"><i class="fas fa-file-alt"></i>Crear</a></li>
-								<li class="<?php echo $UConsultar;?>"><a href="#"><i class="fas fa-search"></i>Consltar</a></li>
-							</ul>
-						</li>
-						<li class="<?php echo $Notificaciones;?>"><a href="#"><i class="fas fa-bell"></i> <span>Notificaciones</span> <span class="badge bg-danger">15</span></a></li>
-						<li class="<?php echo $Reportes;?>"><a href="#"><i class="fas fa-book"></i> <span>Reportes</span></a></li>
+						<li class="<?php echo $Garantias;?>"><a href="Consultar-Garantias"><i class="fas fa-wrench"></i> <span>Garantias</span></a></li>
+						<li class="<?php echo $Ajustes;?>"><a href="Consultar-Ajustes"><i class="fas fa-exchange-alt"></i>  <span>Ajustes</span></a></li>
+						<li class="<?php echo $Usuarios;?>"><a href="Consultar-Usuarios"><i class="fas fa-users"></i>  <span>Usuarios</span></a></li>
+						<li class="<?php echo $Notificaciones;?>"><a href="Consultar-Notificaciones"><i class="fas fa-bell"></i> <span>Notificaciones</span> <span class="badge bg-danger">15</span></a></li>
+						<li class="<?php echo $Reportes;?>"><a href="Consultar-Reportes"><i class="fas fa-book"></i> <span>Reportes</span></a></li>
 					</ul>
 				</nav>
 				

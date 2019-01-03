@@ -118,7 +118,7 @@ if ($rw_user['Genero']=="Masculino") {
 								<div id="resultados_ajax2"></div>
 								<p class="margin-top-30">
 									<button type="submit" class="btn btn-primary">Guardar</button> &nbsp;&nbsp;
-									<button type="button" class="btn btn-default">Cancelar</button>
+									<button type="button"  id="Cancelar"class="btn btn-default">Cancelar</button>
 								</p>
 								
 							</div>
@@ -142,6 +142,9 @@ if ($rw_user['Genero']=="Masculino") {
 	<script src="assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
 	<script src="assets/scripts/common.js"></script>
 	<script>
+	$( "#Cancelar" ).click(function( event ) {
+    location.reload(true);
+})
 	$(function() {
 		// photo upload
 		$('#btn-upload-photo').on('click', function() {
@@ -163,7 +166,7 @@ if ($rw_user['Genero']=="Masculino") {
  var parametros = $(this).serialize();
 	 $.ajax({
 			type: "POST",
-			url: "ajax/editar_usuario.php",
+			url: "Componentes/Ajax/editar_usuario.php",
 			data: parametros,
 			 beforeSend: function(objeto){
 				$("#resultados_ajax2").html("Mensaje: Cargando...");
@@ -182,7 +185,7 @@ if ($rw_user['Genero']=="Masculino") {
  var parametros = $(this).serialize();
 	 $.ajax({
 			type: "POST",
-			url: "ajax/editar_password.php",
+			url: "aComponentes/Ajax/editar_password.php",
 			data: parametros,
 			 beforeSend: function(objeto){
 				$("#resultados_ajax3").html("Mensaje: Cargando...");

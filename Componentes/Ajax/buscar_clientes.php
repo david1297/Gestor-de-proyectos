@@ -7,8 +7,8 @@
 	---------------------------*/
 	include('is_logged.php');//Archivo verifica que el usario que intenta acceder a la URL esta logueado
 	/* Connect To Database*/
-	require_once ("../config/db.php");//Contiene las variables de configuracion para conectar a la base de datos
-	require_once ("../config/conexion.php");//Contiene funcion que conecta a la base de datos
+	require_once ("../../config/db.php");//Contiene las variables de configuracion para conectar a la base de datos
+	require_once ("../../config/conexion.php");//Contiene funcion que conecta a la base de datos
 	
 	$action = (isset($_REQUEST['action'])&& $_REQUEST['action'] !=NULL)?$_REQUEST['action']:'';
 	if (isset($_GET['id'])){
@@ -35,16 +35,16 @@
 	if($action == 'ajax'){
 		// escaping, additionally removing everything that could be (html/javascript-) code
         $q = mysqli_real_escape_string($con,(strip_tags($_REQUEST['q'], ENT_QUOTES)));
-		$sTable = "ProyectoEn, Terceros";
+		$sTable = "Terceros";
 		$sWhere = "";
-		$sWhere.=" WHERE ProyectoEn.Tercero=Terceros.Nit";
+		$sWhere.=" WHERE Terceros.Nit";
 		if ( $_GET['q'] != "" )
 		{
-		$sWhere.= " and  (Terceros.Nombre like '%$q%' or ProyectoEn.Numero like '%$q%')";
+		$sWhere.= " and  (Terceros.Nombre like '%$q%' or Terceros.Nit like '%$q%')";
 			
 		}
 		
-		$sWhere.=" order by ProyectoEn.Numero desc";
+		$sWhere.=" order by Terceros.Nombre desc";
 		include 'pagination.php'; //include pagination file
 		//pagination variables
 		$page = (isset($_REQUEST['page']) && !empty($_REQUEST['page']))?$_REQUEST['page']:1;
@@ -56,7 +56,7 @@
 		$row= mysqli_fetch_array($count_query);
 		$numrows = $row['numrows'];
 		$total_pages = ceil($numrows/$per_page);
-		$reload = './Consultar-Proyectos.php';
+		$reload = './Consultar-Clientes.php';
 		//main query to fetch the data
 		$sql="SELECT * FROM  $sTable $sWhere LIMIT $offset,$per_page";
 		$query = mysqli_query($con, $sql);
@@ -67,38 +67,34 @@
 			<div class="table-responsive">
 			  <table class="table">
 				<tr  class="warning">
-					<th>#</th>
-					<th>Fecha</th>
-					<th>Cliente</th>
-					<th>Usuario</th>
-					<th>Estado</th>
-					<th class='text-right'>Total</th>
-					<th class='text-right'>Acciones</th>
+					<th>Nit</th>
+					<th>Nombre</th>
+					<th>Telefono</th>
+					<th>Correo</th>
+					<th>Ciudad</th>
+					<th>Direccion</th>
+					<th class='text-right'>Editar</th>
 					
 				</tr>
 				<?php
 				while ($row=mysqli_fetch_array($query)){
-						$N_Proyecto=$row['Numero'];
-						$fecha=date("d/m/Y", strtotime($row['FechaDeRealizacion']));
-						$nombre_cliente=$row['Nombre'];
-						$telefono_cliente=$row['Telefono'];
+						$Nit=$row['Nit'];
+						$Nombre=$row['Nombre'];
+						$Telefono=$row['Telefono'];
 						$email_cliente=$row['Correo'];
-						$Usuario=$row['Usuario'];
-						$Estado=$row['Finalizado'];
-						if ($Estado==1){$text_estado="Finalizado";$label_class='label-success';}
-						else{$text_estado="Pendiente";$label_class='label-warning';}
-						$total=$row['Total'];
+						$Ciudad=$row['Ciudad'];
+						$Direccion=$row['Direccion'];
 					?>
 					<tr>
-						<td><?php echo $N_Proyecto; ?></td>
-						<td><?php echo $fecha; ?></td>
-						<td><a href="#" data-toggle="tooltip" data-placement="top" title="<i class='glyphicon glyphicon-phone'></i>&nbsp; <?php echo $telefono_cliente;?><br><i class='glyphicon glyphicon-envelope'></i>   <?php echo $email_cliente;?>" ><?php echo $nombre_cliente;?></a></td>
-						<td><?php echo $Usuario; ?></td>
-						<td><span class="label <?php echo $label_class;?>"><?php echo $text_estado; ?></span></td>
-						<td class='text-right'><?php echo number_format ($total,2); ?></td>					
+						<td><?php echo $Nit; ?></td>
+						<td><?php echo $Nombre; ?></td>
+						<td><?php echo $Telefono; ?></td>
+						<td><?php echo $email_cliente; ?></td>
+						<td><?php echo $Ciudad; ?></td>
+						<td><?php echo $Direccion; ?></td>
+										
 					<td class="text-right">
-						<a href="editar_Proyectos.php?N_Proyecto=<?php echo $N_Proyecto;?>" class='btn btn-default' title='Editar Proyecto' ><i class="glyphicon glyphicon-edit"></i></a> 
-						<a href="#" class='btn btn-default' title='Descargar Proyecto' onclick="imprimir_Proyecto('<?php echo $N_Proyecto;?>');"><i class="fas fa-file-pdf"></i></a> 
+					<a href="#" class='btn btn-default' title='Editar cliente' onclick="obtener_datos('<?php echo $id_cliente;?>');" data-toggle="modal" data-target="#nuevoCliente"><i class="glyphicon glyphicon-edit"></i></a> 
 					</td>
 						
 					</tr>

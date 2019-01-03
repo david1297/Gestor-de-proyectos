@@ -5,8 +5,8 @@
            $errors[] = "Nombre vacío";
         } else if (!empty($_POST['nombre'])){
 		/* Connect To Database*/
-		require_once ("../config/db.php");//Contiene las variables de configuracion para conectar a la base de datos
-		require_once ("../config/conexion.php");//Contiene funcion que conecta a la base de datos
+		require_once ("../../config/db.php");
+			require_once ("../../config/conexion.php");
 		// escaping, additionally removing everything that could be (html/javascript-) code
 		$nombre=mysqli_real_escape_string($con,(strip_tags($_POST["nombre"],ENT_QUOTES)));
 		$telefono=mysqli_real_escape_string($con,(strip_tags($_POST["telefono"],ENT_QUOTES)));

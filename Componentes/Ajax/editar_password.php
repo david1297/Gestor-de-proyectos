@@ -6,7 +6,7 @@ if (version_compare(PHP_VERSION, '5.3.7', '<')) {
 } else if (version_compare(PHP_VERSION, '5.5.0', '<')) {
     // if you are using PHP 5.3 or PHP 5.4 you have to include the password_api_compatibility_library.php
     // (this library adds the PHP 5.5 password hashing functions to older versions of PHP)
-    require_once("../libraries/password_compatibility_library.php");
+    require_once("../../libraries/password_compatibility_library.php");
 }		
 		if (empty($_POST['user_id_mod'])){
 			$errors[] = "ID vacío";
@@ -20,8 +20,8 @@ if (version_compare(PHP_VERSION, '5.3.7', '<')) {
             && !empty($_POST['user_password_repeat3'])
             && ($_POST['user_password_new3'] === $_POST['user_password_repeat3'])
         ) {
-            require_once ("../config/db.php");//Contiene las variables de configuracion para conectar a la base de datos
-			require_once ("../config/conexion.php");//Contiene funcion que conecta a la base de datos
+            require_once ("../../config/db.php");//Contiene las variables de configuracion para conectar a la base de datos
+			require_once ("../../config/conexion.php");//Contiene funcion que conecta a la base de datos
 			
 				$user_id=$_POST['user_id_mod'];
 				$user_password = $_POST['user_password_new3'];
